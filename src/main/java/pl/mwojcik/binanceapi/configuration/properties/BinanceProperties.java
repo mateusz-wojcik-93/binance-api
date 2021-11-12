@@ -10,7 +10,9 @@ import org.springframework.context.annotation.Configuration;
 public class BinanceProperties {
 
     private String baseUrl;
+    private String pageBaseUrl;
     private String pingUrl;
     private String serverTimeUrl;
     private String exchangeInfoUrl;
+    private String orderBookUrl;
 }

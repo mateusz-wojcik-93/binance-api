@@ -2,6 +2,7 @@ package pl.mwojcik.binanceapi.client;
 
 import pl.mwojcik.binanceapi.client.dto.ExchangeInfo;
 import pl.mwojcik.binanceapi.client.dto.ServerTime;
+import pl.mwojcik.binanceapi.client.market.OrderBook;
 import reactor.core.publisher.Mono;
 
 public interface BinanceApiService {
@@ -10,5 +11,7 @@ public interface BinanceApiService {
 
     Mono<ServerTime> getServerTime();
 
-    Mono<Object> getExchangeInfo();
+    Mono<ExchangeInfo> getExchangeInfo();
+
+    Mono<OrderBook> getOrderBook(String symbol, Integer limit);
 }

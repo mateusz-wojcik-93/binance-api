@@ -1,8 +1,10 @@
 binance:
   base-url: https://api.binance.com
+  page-base-url: https://binance.com
   ping-url: ${binance.base-url}/api/v1/ping
   server-time-url: ${binance.base-url}/api/v1/time
   exchange-info-url: ${binance.base-url}/api/v3/exchangeInfo
+  order-book-url: ${binance.base-url}/api/v3/depth
 
 spring:
   codec:

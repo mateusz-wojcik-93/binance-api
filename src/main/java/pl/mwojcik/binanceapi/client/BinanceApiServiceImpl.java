@@ -2,13 +2,18 @@ package pl.mwojcik.binanceapi.client;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriComponentsBuilder;
 import pl.mwojcik.binanceapi.client.dto.ExchangeInfo;
 import pl.mwojcik.binanceapi.client.dto.ServerTime;
+import pl.mwojcik.binanceapi.client.market.OrderBook;
 import pl.mwojcik.binanceapi.configuration.properties.BinanceProperties;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
+import java.util.Collections;
 
 @Service
 @AllArgsConstructor
@@ -34,11 +39,27 @@ public class BinanceApiServiceImpl implements BinanceApiService {
     }
 
     @Override
-    public Mono<Object> getExchangeInfo() {
+    public Mono<ExchangeInfo> getExchangeInfo() {
         return binanceWebClient.get()
                                .uri(URI.create(binanceProperties.getExchangeInfoUrl()))
                                .retrieve()
-                               .bodyToMono(Object.class);
+                               .bodyToMono(ExchangeInfo.class);
+    }
+
+    @Override
+    public Mono<OrderBook> getOrderBook(String symbol, Integer limit) {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.put("symbol", Collections.singletonList(symbol));
+        params.put("limit", Collections.singletonList(String.valueOf(limit)));
+        URI url = UriComponentsBuilder.fromUri(URI.create(binanceProperties.getOrderBookUrl()))
+                                      .queryParams(params)
+                                      .build()
+                                      .toUri();
+
+        return binanceWebClient.get()
+                               .uri(url)
+                               .retrieve()
+                               .bodyToMono(OrderBook.class);
     }
 
 }
