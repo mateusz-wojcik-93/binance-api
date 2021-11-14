@@ -1,33 +1,14 @@
 package pl.mwojcik.binanceapi.client.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 import java.util.List;
 
-/**
- * History of account withdrawals.
- *
- * @see Withdraw
- */
+@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LoanQueryResult {
 
-  private int total;
-  private List<Loan> rows;
-
-  public int getTotal() {
-    return total;
-  }
-
-  public void setTotal(int total) {
-    this.total = total;
-  }
-
-  public List<Loan> getRows() {
-    return rows;
-  }
-
-  public void setRows(List<Loan> rows) {
-    this.rows = rows;
-  }
+    private int total;
+    private List<Loan> rows;
 }

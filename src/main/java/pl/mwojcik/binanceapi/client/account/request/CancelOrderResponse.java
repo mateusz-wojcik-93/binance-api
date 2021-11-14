@@ -8,13 +8,9 @@ import lombok.Data;
 public class CancelOrderResponse {
 
     private String symbol;
-
     private String origClientOrderId;
-
     private String orderId;
-
     private String clientOrderId;
-
     private String status;
     private String executedQty;
 }

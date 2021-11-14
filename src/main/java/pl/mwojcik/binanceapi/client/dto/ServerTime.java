@@ -6,6 +6,7 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 public class ServerTime {
+
     private Long serverTime;
 
     @Override

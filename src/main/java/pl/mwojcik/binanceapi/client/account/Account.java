@@ -10,21 +10,13 @@ import java.util.List;
 public class Account {
 
     private int makerCommission;
-
     private int takerCommission;
-
     private int buyerCommission;
-
     private int sellerCommission;
-
     private boolean canTrade;
-
     private boolean canWithdraw;
-
     private boolean canDeposit;
-
     private long updateTime;
-
     private List<AssetBalance> balances;
 
     public AssetBalance getAssetBalance(String symbol) {

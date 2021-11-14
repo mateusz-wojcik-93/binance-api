@@ -10,9 +10,6 @@ import java.util.List;
 public class OrderBook {
 
     private long lastUpdateId;
-
     private List<OrderBookEntry> bids;
-
     private List<OrderBookEntry> asks;
-
 }

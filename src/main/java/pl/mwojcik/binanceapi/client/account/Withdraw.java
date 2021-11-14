@@ -8,18 +8,11 @@ import lombok.Data;
 public class Withdraw {
 
     private String amount;
-
     private String address;
-
     private String asset;
-
     private String applyTime;
-
     private String successTime;
-
     private String txId;
-
     private String id;
-
     private int status;
 }

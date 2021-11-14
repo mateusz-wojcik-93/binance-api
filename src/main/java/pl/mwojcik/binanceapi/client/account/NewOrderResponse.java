@@ -14,28 +14,16 @@ import java.util.List;
 public class NewOrderResponse {
 
     private String symbol;
-
     private Long orderId;
-
     private String clientOrderId;
-
     private String price;
-
     private String origQty;
-
     private String executedQty;
-
     private String cummulativeQuoteQty;
-
     private OrderStatus status;
-
     private TimeInForce timeInForce;
-
     private OrderType type;
-
     private OrderSide side;
-
     private List<Trade> fills;
-
     private Long transactTime;
 }

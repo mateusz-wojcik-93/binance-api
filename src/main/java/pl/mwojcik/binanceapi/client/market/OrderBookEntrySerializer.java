@@ -6,9 +6,6 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import java.io.IOException;
 
-/**
- * Custom serializer for an OrderBookEntry.
- */
 public class OrderBookEntrySerializer extends JsonSerializer<OrderBookEntry> {
 
   @Override

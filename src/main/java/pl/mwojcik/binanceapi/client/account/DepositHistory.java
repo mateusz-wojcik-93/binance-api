@@ -12,8 +12,6 @@ public class DepositHistory {
 
     @JsonProperty("depositList")
     private List<Deposit> depositList;
-
     private boolean success;
-
     private String msg;
 }

@@ -9,11 +9,8 @@ import lombok.Data;
 public class TradeHistoryItem {
 
     private long id;
-
     private String price;
-
     private String qty;
-
     private long time;
 
     @JsonProperty("isBuyerMaker")

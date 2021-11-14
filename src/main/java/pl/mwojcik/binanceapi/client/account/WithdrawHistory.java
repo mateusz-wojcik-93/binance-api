@@ -10,6 +10,5 @@ import java.util.List;
 public class WithdrawHistory {
 
     private List<Withdraw> withdrawList;
-
     private boolean success;
 }

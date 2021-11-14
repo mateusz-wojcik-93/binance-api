@@ -8,8 +8,6 @@ import lombok.Data;
 public class WithdrawResult {
 
     private String msg;
-
     private boolean success;
-
     private String id;
 }

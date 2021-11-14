@@ -10,19 +10,12 @@ import java.util.List;
 public class MarginAccount {
 
     private boolean borrowEnabled;
-
     private String marginLevel;
-
     private String totalAssetOfBtc;
-
     private String totalLiabilityOfBtc;
-
     private String totalNetAssetOfBtc;
-
     private boolean tradeEnabled;
-
     private boolean transferEnabled;
-
     private List<MarginAssetBalance> userAssets;
 
     public MarginAssetBalance getAssetBalance(final String symbol) {

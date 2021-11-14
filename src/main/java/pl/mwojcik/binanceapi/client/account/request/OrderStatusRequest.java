@@ -8,7 +8,6 @@ import lombok.Setter;
 public class OrderStatusRequest extends OrderRequest {
 
     private Long orderId;
-
     private String origClientOrderId;
 
     public OrderStatusRequest(String symbol) {

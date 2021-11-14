@@ -8,13 +8,9 @@ import lombok.Data;
 public class Deposit {
 
     private String amount;
-
     private String asset;
-
     private String insertTime;
-
     private String txId;
-
     private int status;
 
 }

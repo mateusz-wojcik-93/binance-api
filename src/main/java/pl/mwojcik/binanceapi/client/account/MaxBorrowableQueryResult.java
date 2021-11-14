@@ -1,29 +1,11 @@
 package pl.mwojcik.binanceapi.client.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
-/**
- * Max Borrow Query Result
- *
- * @see Withdraw
- */
+@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MaxBorrowableQueryResult {
 
-  private String amount;
-
-  public String getAmount() {
-    return amount;
-  }
-
-  public void setAmount(String amount) {
-    this.amount = amount;
-  }
-
-  @Override
-  public String toString() {
-    return "MaxBorrowQueryResult{" +
-            "amount='" + amount + '\'' +
-            '}';
-  }
+    private String amount;
 }

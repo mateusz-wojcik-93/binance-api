@@ -10,19 +10,12 @@ import lombok.Data;
 public class Trade {
 
     private Long id;
-
     private String price;
-
     private String qty;
-
     private String quoteQty;
-
     private String commission;
-
     private String commissionAsset;
-
     private long time;
-
     private String symbol;
 
     @JsonProperty("isBuyer")
@@ -33,7 +26,6 @@ public class Trade {
 
     @JsonProperty("isBestMatch")
     private boolean bestMatch;
-
     private String orderId;
 
     @JsonSetter("tradeId")

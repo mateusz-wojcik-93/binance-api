@@ -8,10 +8,7 @@ import lombok.Data;
 public class DepositAddress {
 
     private String address;
-
     private boolean success;
-
     private String addressTag;
-
     private String asset;
 }

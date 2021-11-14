@@ -8,7 +8,5 @@ import lombok.Data;
 public class ExchangeFilter {
 
     private FilterType filterType;
-
     private Integer limit;
-
 }

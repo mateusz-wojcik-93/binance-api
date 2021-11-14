@@ -9,9 +9,7 @@ import pl.mwojcik.binanceapi.configuration.BinanceApiConstants;
 public class OrderRequest {
 
     private final String symbol;
-
     private Long recvWindow;
-
     private Long timestamp;
 
     public OrderRequest(String symbol) {

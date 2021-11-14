@@ -11,13 +11,8 @@ import java.math.BigDecimal;
 public class BookTicker {
 
     private String symbol;
-
     private BigDecimal bidPrice;
-
     private BigDecimal bidQty;
-
     private BigDecimal askPrice;
-
     private BigDecimal askQty;
-
 }
