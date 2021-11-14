@@ -15,4 +15,5 @@ public class BinanceProperties {
     private String serverTimeUrl;
     private String exchangeInfoUrl;
     private String orderBookUrl;
+    private String tradesUrl;
 }

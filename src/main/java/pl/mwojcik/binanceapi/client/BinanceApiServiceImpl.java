@@ -1,11 +1,13 @@
 package pl.mwojcik.binanceapi.client;
 
 import lombok.AllArgsConstructor;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
+import pl.mwojcik.binanceapi.client.account.TradeHistoryItem;
 import pl.mwojcik.binanceapi.client.dto.ExchangeInfo;
 import pl.mwojcik.binanceapi.client.dto.ServerTime;
 import pl.mwojcik.binanceapi.client.market.OrderBook;
@@ -14,6 +16,7 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.util.Collections;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -55,11 +58,25 @@ public class BinanceApiServiceImpl implements BinanceApiService {
                                       .queryParams(params)
                                       .build()
                                       .toUri();
-
         return binanceWebClient.get()
                                .uri(url)
                                .retrieve()
                                .bodyToMono(OrderBook.class);
+    }
+
+    @Override
+    public Mono<List<TradeHistoryItem>> getTrades(String symbol, Integer limit){
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.put("symbol", Collections.singletonList(symbol));
+        params.put("limit", Collections.singletonList(String.valueOf(limit)));
+        URI url = UriComponentsBuilder.fromUri(URI.create(binanceProperties.getTradesUrl()))
+                                      .queryParams(params)
+                                      .build()
+                                      .toUri();
+        return binanceWebClient.get()
+                               .uri(url)
+                               .retrieve()
+                               .bodyToMono(new ParameterizedTypeReference<List<TradeHistoryItem>>() {});
     }
 
 }

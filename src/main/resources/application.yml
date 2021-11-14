@@ -5,6 +5,7 @@ binance:
   server-time-url: ${binance.base-url}/api/v1/time
   exchange-info-url: ${binance.base-url}/api/v3/exchangeInfo
   order-book-url: ${binance.base-url}/api/v3/depth
+  trades-url: ${binance.base-url}/api/v3/trades
 
 spring:
   codec:
