@@ -1,4 +1,5 @@
 binance:
+  secret-key: your-secret-key
   base-url: https://api.binance.com
   page-base-url: https://binance.com
   ping-url: ${binance.base-url}/api/v1/ping
@@ -6,6 +7,16 @@ binance:
   exchange-info-url: ${binance.base-url}/api/v3/exchangeInfo
   order-book-url: ${binance.base-url}/api/v3/depth
   trades-url: ${binance.base-url}/api/v3/trades
+  #market-data
+  historical-trades-url: ${binance.base-url}/api/v1/historicalTrades
+  agg-trades-url: ${binance.base-url}/api/v1/aggTrades
+  candlestick-bars-url: ${binance.base-url}/api/v1/klines
+  one-day-price-url: ${binance.base-url}/api/v1/ticker/24hr
+  all-one-day-price-url: ${binance.base-url}/api/v1/ticker/24hr
+  all-latest-prices-url: ${binance.base-url}/api/v1/ticker/allPrices
+  latest-price-url: ${binance.base-url}/api/v3/ticker/price
+  all-book-tickers-url: ${binance.base-url}/api/v1/ticker/allBookTickers
+
 
 spring:
   codec:

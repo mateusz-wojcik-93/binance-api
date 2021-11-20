@@ -20,4 +20,5 @@ public interface BinanceApiService {
 
     Mono<List<TradeHistoryItem>> getTrades(String symbol, Integer limit);
 
+    Mono<List<TradeHistoryItem>> getHistoricalTrades(String symbol, Integer limit, Long fromId);
 }

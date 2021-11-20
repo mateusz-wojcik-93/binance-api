@@ -16,6 +16,7 @@ public class BinanceWebClientConfiguration {
     @Bean
     public WebClient binanceWebClient() {
         return WebClient.builder()
+                        .defaultHeader("X-MBX-APIKEY", binanceProperties.getApiKey())
                         .exchangeStrategies(ExchangeStrategies.builder()
                                                               .codecs(configurer -> configurer
                                                                       .defaultCodecs()

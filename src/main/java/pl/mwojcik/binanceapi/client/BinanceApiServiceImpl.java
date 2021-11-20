@@ -12,6 +12,7 @@ import pl.mwojcik.binanceapi.client.dto.ExchangeInfo;
 import pl.mwojcik.binanceapi.client.dto.ServerTime;
 import pl.mwojcik.binanceapi.client.market.OrderBook;
 import pl.mwojcik.binanceapi.configuration.properties.BinanceProperties;
+import pl.mwojcik.binanceapi.util.HmacSHA256Signer;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
@@ -54,29 +55,49 @@ public class BinanceApiServiceImpl implements BinanceApiService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.put("symbol", Collections.singletonList(symbol));
         params.put("limit", Collections.singletonList(String.valueOf(limit)));
-        URI url = UriComponentsBuilder.fromUri(URI.create(binanceProperties.getOrderBookUrl()))
-                                      .queryParams(params)
-                                      .build()
-                                      .toUri();
         return binanceWebClient.get()
-                               .uri(url)
+                               .uri(buildUrl(params, binanceProperties.getOrderBookUrl()))
                                .retrieve()
                                .bodyToMono(OrderBook.class);
     }
 
     @Override
-    public Mono<List<TradeHistoryItem>> getTrades(String symbol, Integer limit){
+    public Mono<List<TradeHistoryItem>> getTrades(String symbol, Integer limit) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.put("symbol", Collections.singletonList(symbol));
         params.put("limit", Collections.singletonList(String.valueOf(limit)));
-        URI url = UriComponentsBuilder.fromUri(URI.create(binanceProperties.getTradesUrl()))
-                                      .queryParams(params)
-                                      .build()
-                                      .toUri();
+        URI uri = buildUrl(params, binanceProperties.getTradesUrl());
+        String signature = generateSignature(uri, "5uPqQXrFE0zcoWw18bGuQFQhKfEp0xZxQHvBdOBLD3uqSPkRVPGQ4U3aTmzp3UQc");
+        params.put("signature", Collections.singletonList(signature));
+        uri = buildUrl(params, binanceProperties.getTradesUrl());
         return binanceWebClient.get()
-                               .uri(url)
+                               .uri(uri)
                                .retrieve()
                                .bodyToMono(new ParameterizedTypeReference<List<TradeHistoryItem>>() {});
+    }
+
+    @Override
+    public Mono<List<TradeHistoryItem>> getHistoricalTrades(String symbol, Integer limit, Long fromId) {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.put("symbol", Collections.singletonList(symbol));
+        params.put("limit", Collections.singletonList(String.valueOf(limit)));
+        params.put("fromId", Collections.singletonList(String.valueOf(fromId)));
+        URI uri = buildUrl(params, binanceProperties.getHistoricalTradesUrl());
+        return binanceWebClient.get()
+                               .uri(uri)
+                               .retrieve()
+                               .bodyToMono(new ParameterizedTypeReference<List<TradeHistoryItem>>() {});
+    }
+
+    private static String generateSignature(URI uri, String secretKey) {
+        return HmacSHA256Signer.sign(uri.getQuery(), secretKey);
+    }
+
+    private static URI buildUrl(MultiValueMap<String, String> params, String historicalTradesUrl) {
+        return UriComponentsBuilder.fromUri(URI.create(historicalTradesUrl))
+                                   .queryParams(params)
+                                   .build()
+                                   .toUri();
     }
 
 }
