@@ -1,7 +1,7 @@
 package pl.mwojcik.binanceapi.client.account;
 
 import lombok.Data;
-import pl.mwojcik.binanceapi.client.LiquidityOperationRecordStatus;
+import pl.mwojcik.binanceapi.client.dto.LiquidityOperationRecordStatus;
 
 @Data
 public class LiquidityOperationRecord {

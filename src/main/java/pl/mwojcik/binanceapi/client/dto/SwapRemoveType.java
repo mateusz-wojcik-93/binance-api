@@ -1,4 +1,4 @@
-package pl.mwojcik.binanceapi.client;
+package pl.mwojcik.binanceapi.client.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

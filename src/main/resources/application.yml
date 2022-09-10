@@ -21,3 +21,5 @@ binance:
 spring:
   codec:
     max-in-memory-size: 1000MB
+server:
+  port: 8888

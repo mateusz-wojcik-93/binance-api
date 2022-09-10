@@ -2,7 +2,7 @@ package pl.mwojcik.binanceapi.client.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import pl.mwojcik.binanceapi.client.LoanStatus;
+import pl.mwojcik.binanceapi.client.dto.LoanStatus;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)

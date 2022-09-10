@@ -3,10 +3,9 @@ package pl.mwojcik.binanceapi.client.account;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import pl.mwojcik.binanceapi.client.OrderSide;
-import pl.mwojcik.binanceapi.client.OrderStatus;
-import pl.mwojcik.binanceapi.client.OrderType;
-import pl.mwojcik.binanceapi.client.TimeInForce;
+import pl.mwojcik.binanceapi.client.dto.OrderSide;
+import pl.mwojcik.binanceapi.client.dto.OrderStatus;
+import pl.mwojcik.binanceapi.client.dto.TimeInForce;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
