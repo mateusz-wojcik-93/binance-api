@@ -14,4 +14,8 @@ public class BinanceApiConstants {
 
     public static final long DEFAULT_MARGIN_RECEIVING_WINDOW = 5_000L;
 
+    private BinanceApiConstants(){
+
+    }
+
 }

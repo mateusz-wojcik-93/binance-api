@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class ServerTime {
 
-    private Long serverTime;
+    private Long serverTimeValue;
 
     @Override
     public String toString() {
-        return String.valueOf(serverTime);
+        return String.valueOf(serverTimeValue);
     }
 }

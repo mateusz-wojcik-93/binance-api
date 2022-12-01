@@ -7,10 +7,10 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CrossMarginAssets {
 
-    public String assetFullName;
-    public String assetName;
-    public boolean isBorrowable;
-    public boolean isMortgageable;
-    public String userMinBorrow;
-    public String userMinRepay;
+    private String assetFullName;
+    private String assetName;
+    private boolean isBorrowable;
+    private boolean isMortgageable;
+    private String userMinBorrow;
+    private String userMinRepay;
 }

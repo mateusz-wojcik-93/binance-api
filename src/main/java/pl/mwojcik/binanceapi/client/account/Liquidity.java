@@ -10,7 +10,7 @@ public class Liquidity {
     private String poolId;
     private String poolName;
     private Long updateTime;
-    private Map<String, String> liquidity;
+    private Map<String, String> liquidityMap;
     private Share share;
 
     @Data

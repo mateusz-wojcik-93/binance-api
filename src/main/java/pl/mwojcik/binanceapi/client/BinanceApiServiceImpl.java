@@ -26,6 +26,8 @@ import static java.util.Optional.ofNullable;
 @AllArgsConstructor
 public class BinanceApiServiceImpl implements BinanceApiService {
 
+    public static final String SYMBOL = "symbol";
+    public static final String LIMIT = "limit";
     private WebClient binanceWebClient;
     private BinanceProperties binanceProperties;
 
@@ -56,8 +58,8 @@ public class BinanceApiServiceImpl implements BinanceApiService {
     @Override
     public Mono<OrderBook> getOrderBook(String symbol, Integer limit) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.put("symbol", Collections.singletonList(symbol));
-        params.put("limit", Collections.singletonList(String.valueOf(limit)));
+        params.put(SYMBOL, Collections.singletonList(symbol));
+        params.put(LIMIT, Collections.singletonList(String.valueOf(limit)));
         return binanceWebClient.get()
                                .uri(buildUrl(params, binanceProperties.getOrderBookUrl()))
                                .retrieve()
@@ -67,8 +69,8 @@ public class BinanceApiServiceImpl implements BinanceApiService {
     @Override
     public Mono<List<TradeHistoryItem>> getTrades(String symbol, Integer limit) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.put("symbol", Collections.singletonList(symbol));
-        params.put("limit", Collections.singletonList(String.valueOf(limit)));
+        params.put(SYMBOL, Collections.singletonList(symbol));
+        params.put(LIMIT, Collections.singletonList(String.valueOf(limit)));
         URI uri = buildUrl(params, binanceProperties.getTradesUrl());
         String signature = generateSignature(uri, "5uPqQXrFE0zcoWw18bGuQFQhKfEp0xZxQHvBdOBLD3uqSPkRVPGQ4U3aTmzp3UQc");
         params.put("signature", Collections.singletonList(signature));
@@ -82,8 +84,8 @@ public class BinanceApiServiceImpl implements BinanceApiService {
     @Override
     public Mono<List<TradeHistoryItem>> getHistoricalTrades(String symbol, Integer limit, Long fromId) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.put("symbol", Collections.singletonList(symbol));
-        params.put("limit", Collections.singletonList(String.valueOf(limit)));
+        params.put(SYMBOL, Collections.singletonList(symbol));
+        params.put(LIMIT, Collections.singletonList(String.valueOf(limit)));
         params.put("fromId", Collections.singletonList(String.valueOf(fromId)));
         URI uri = buildUrl(params, binanceProperties.getHistoricalTradesUrl());
         return binanceWebClient.get()
@@ -95,10 +97,10 @@ public class BinanceApiServiceImpl implements BinanceApiService {
     @Override
     public Mono<List<AggTrade>> getAggTrades(String symbol, String fromId, Integer limit, Long startTime, Long endTime) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.put("symbol", Collections.singletonList(symbol));
+        params.put(SYMBOL, Collections.singletonList(symbol));
 
         ofNullable(fromId).ifPresent(aggTradesFromId -> params.put("fromId", Collections.singletonList(aggTradesFromId)));
-        ofNullable(limit).ifPresent(aggTradesLimit -> params.put("limit", Collections.singletonList(String.valueOf(aggTradesLimit))));
+        ofNullable(limit).ifPresent(aggTradesLimit -> params.put(LIMIT, Collections.singletonList(String.valueOf(aggTradesLimit))));
         ofNullable(startTime).ifPresent(aggTradesStartTime -> params.put("startTime", Collections.singletonList(String.valueOf(aggTradesStartTime))));
         ofNullable(limit).ifPresent(aggTradesEndTime -> params.put("endTime", Collections.singletonList(String.valueOf(aggTradesEndTime))));
 
