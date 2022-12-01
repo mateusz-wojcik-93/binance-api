@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import pl.mwojcik.binanceapi.client.account.TradeHistoryItem;
 import pl.mwojcik.binanceapi.client.dto.ExchangeInfo;
 import pl.mwojcik.binanceapi.client.dto.ServerTime;
+import pl.mwojcik.binanceapi.client.market.AggTrade;
 import pl.mwojcik.binanceapi.client.market.OrderBook;
 import pl.mwojcik.binanceapi.configuration.properties.BinanceProperties;
 import pl.mwojcik.binanceapi.util.HmacSHA256Signer;
@@ -18,6 +19,8 @@ import reactor.core.publisher.Mono;
 import java.net.URI;
 import java.util.Collections;
 import java.util.List;
+
+import static java.util.Optional.ofNullable;
 
 @Service
 @AllArgsConstructor
@@ -87,6 +90,24 @@ public class BinanceApiServiceImpl implements BinanceApiService {
                                .uri(uri)
                                .retrieve()
                                .bodyToMono(new ParameterizedTypeReference<List<TradeHistoryItem>>() {});
+    }
+
+    @Override
+    public Mono<List<AggTrade>> getAggTrades(String symbol, String fromId, Integer limit, Long startTime, Long endTime) {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.put("symbol", Collections.singletonList(symbol));
+
+        ofNullable(fromId).ifPresent(aggTradesFromId -> params.put("fromId", Collections.singletonList(aggTradesFromId)));
+        ofNullable(limit).ifPresent(aggTradesLimit -> params.put("limit", Collections.singletonList(String.valueOf(aggTradesLimit))));
+        ofNullable(startTime).ifPresent(aggTradesStartTime -> params.put("startTime", Collections.singletonList(String.valueOf(aggTradesStartTime))));
+        ofNullable(limit).ifPresent(aggTradesEndTime -> params.put("endTime", Collections.singletonList(String.valueOf(aggTradesEndTime))));
+
+        URI uri = buildUrl(params, binanceProperties.getAggTradesUrl());
+
+        return binanceWebClient.get()
+                               .uri(uri)
+                               .retrieve()
+                               .bodyToMono(new ParameterizedTypeReference<List<AggTrade>>() {});
     }
 
     private static String generateSignature(URI uri, String secretKey) {

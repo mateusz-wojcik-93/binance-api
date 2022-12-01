@@ -1,5 +1,6 @@
 package pl.mwojcik.binanceapi.internal;
 
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,7 @@ import pl.mwojcik.binanceapi.client.BinanceApiService;
 import pl.mwojcik.binanceapi.client.account.TradeHistoryItem;
 import pl.mwojcik.binanceapi.client.dto.ExchangeInfo;
 import pl.mwojcik.binanceapi.client.dto.ServerTime;
+import pl.mwojcik.binanceapi.client.market.AggTrade;
 import pl.mwojcik.binanceapi.client.market.OrderBook;
 import reactor.core.publisher.Mono;
 
@@ -49,5 +51,12 @@ public class TestController {
     @GetMapping(value = "/historical-trades")
     public Mono<List<TradeHistoryItem>> getHistoricalTrades(@RequestParam("symbol") String symbol, @RequestParam("limit") Integer limit, @RequestParam("fromId") Long fromId) {
         return binanceApiService.getHistoricalTrades(symbol, limit, fromId);
+    }
+
+    @GetMapping(value = "/agg-trades")
+    public Mono<List<AggTrade>> getAggTrades(@RequestParam("symbol") String symbol, @Nullable @RequestParam("limit") Integer limit,
+                                             @Nullable @RequestParam("fromId") String fromId, @Nullable @RequestParam("startTime") Long startTime,
+                                             @Nullable @RequestParam("endTime") Long endTime) {
+        return binanceApiService.getAggTrades(symbol, fromId, limit, startTime, endTime);
     }
 }
