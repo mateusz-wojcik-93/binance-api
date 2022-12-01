@@ -3,6 +3,7 @@ package pl.mwojcik.binanceapi.client.account;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import pl.mwojcik.binanceapi.client.dto.OrderSide;
+import pl.mwojcik.binanceapi.client.dto.OrderType;
 import pl.mwojcik.binanceapi.client.dto.TimeInForce;
 import pl.mwojcik.binanceapi.configuration.BinanceApiConstants;
 

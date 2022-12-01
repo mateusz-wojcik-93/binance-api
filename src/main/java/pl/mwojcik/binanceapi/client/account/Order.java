@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import pl.mwojcik.binanceapi.client.dto.OrderSide;
 import pl.mwojcik.binanceapi.client.dto.OrderStatus;
+import pl.mwojcik.binanceapi.client.dto.OrderType;
 import pl.mwojcik.binanceapi.client.dto.TimeInForce;
 
 @Data
